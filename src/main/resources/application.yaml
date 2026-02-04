@@ -1,0 +1,66 @@
+spring:
+  application:
+    name: trivedruna
+
+  datasource:
+    # Cadena de conexion a la bbdd.
+    # Al poner el valor entre ${key:value} priorizamos la variable de entorno de nombre key. Si no la encuentra, toma el valor value.
+    url: ${url:jdbc:mysql://localhost:3306/trivuna?useUnicode=true&characterEncoding=UTF-8&useLegacyDatetimeCode=false&serverTimezone=Europe/Madrid}
+    username: ${user:root}
+    password: ${pass:root}
+
+  jpa:
+    hibernate:
+      # Data Definition Language, indica como Hibernate debe manejar el esquema de la base de datos al iniciar la app.
+      # Recomendado: Validate.
+      ddl-auto: none
+
+    properties:
+      hibernate:
+        # Indica el dialecto de la base de datos optimizado para MySQL para consultas eficientes.
+        dialect: org.hibernate.dialect.MySQLDialect
+
+    # Mostrar en la consola las consultas SQL (false no las muestra, true las muestra).
+    show-sql: true
+
+    # Activar la inicializacion de los datos de la base de datos al iniciar la app.
+    defer-datasource-initialization: true
+
+  sql:
+    init:
+      # Indica las ubicaciones de los scripts de inicializacion de BBDD en caso de que el campo anterior este en true.
+      data-locations:
+        - classpath:db/mysql/schema.sql
+        - classpath:db/mysql/data.sql
+      # La siguiente propiedad indica cuando crear la base de datos.
+      # Si esta en always la crea siempre, si esta en never nunca.
+      mode: ${dbinitmode:always}
+      encoding: UTF-8
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: when_authorized
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+server:
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+auth:
+  access-token-secret-key: ${access_token_secret_key:MDEyMzQ1Njc4OUFCQ0RFRjAxMjM0NTY3ODlBQkNERUY=}
+  access-token-expiration: ${access_token_expiration:360000000}
+  refresh-token-secret-key: ${refresh_token_secret_key:MDEyMzQ1Njc4OUFCQ0RFRjAxMjM0NTY3ODlBQkNERUY=}
+  refresh-token-expiration: ${refresh_token_expiration:1209600000}

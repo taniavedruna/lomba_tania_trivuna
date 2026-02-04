@@ -1,0 +1,13 @@
+package org.vedruna.trivedruna;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class TrivedrunaApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(TrivedrunaApplication.class, args);
+	}
+
+}

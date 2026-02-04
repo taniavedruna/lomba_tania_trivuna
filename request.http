@@ -1,0 +1,97 @@
+@token = eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImFkbWluQHRyaXZ1bmEuY29tIiwic3ViIjoiYWRtaW4iLCJpYXQiOjE3NzAwMzgxOTMsImV4cCI6MTc3MDM5ODE5M30.A5oG5jGnEvdCHARLq5_1xSW4eeHqNUMc-OZRsuELUm0
+
+### Register
+POST http://localhost:8080/api/v1/auth/register
+Content-Type: application/json
+
+{
+  "username": "dhanxrocks",
+  "email": "merchi@example.com",
+  "password": "admin123",
+  "courseName": "DAW",
+  "name": "mercedes",
+  "surname1": "de luna"
+  
+}
+
+### Login
+POST http://localhost:8080/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "admin123"
+}
+
+### Info user logueado
+GET http://localhost:8080/api/v1/auth/me
+Authorization: Bearer {{token}}
+
+### Update user (me)
+PATCH http://localhost:8080/api/v1/users/me
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "username": "merchi",
+  "email": "mercedes@example.com",
+  "password": "admin123",
+  "name": "merchi",
+  "surname1": "de luna"
+}
+
+### User por id
+GET http://localhost:8080/api/v1/users/2
+Authorization: Bearer {{token}}
+
+### Get de todas las preguntas paginadas
+GET http://localhost:8080/api/v1/questions/
+Authorization: Bearer {{token}}
+
+### Crear preguntas (ADMIN)
+POST http://localhost:8080/api/v1/questions
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+[
+  {
+    "questionText": "¿Capital de Francia?",
+    "incorrectAnswer1": "Roma",
+    "incorrectAnswer2": "Berlín",
+    "incorrectAnswer3": "Lisboa",
+    "correctAnswer": "París",
+    "categoryId": 1,
+    "courseId": 1,
+    "isApproved": true
+  }
+]
+
+### Preguntas por categoría (paginado)
+GET http://localhost:8080/api/v1/questions/category/1?page=0&size=10
+Authorization: Bearer {{token}}
+
+### Preguntas sin responder del usuario por categoría (paginado)
+GET http://localhost:8080/api/v1/questions/category/2/unanswered?page=0&size=10
+Authorization: Bearer {{token}}
+
+### Detalle de pregunta por id
+GET http://localhost:8080/api/v1/questions/1
+Authorization: Bearer {{token}}
+
+### Enviar respuesta a una pregunta
+POST http://localhost:8080/api/v1/answers
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "questionId": 2,
+  "selectedAnswer": "pepe"
+}
+
+### Listar respuestas paginadas
+GET http://localhost:8080/api/v1/answers?page=0&size=10
+Authorization: Bearer {{token}}
+
+### Listar cursos (sin paginar)
+GET http://localhost:8080/api/v1/courses
+Authorization: Bearer {{token}}

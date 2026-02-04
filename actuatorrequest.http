@@ -1,0 +1,15 @@
+### Actuator - Health
+GET http://localhost:8080/actuator/health
+
+### Actuator - Info
+GET http://localhost:8080/actuator/info
+
+### Actuator - Metrics (lista)
+GET http://localhost:8080/actuator/metrics
+
+### Actuator - Métrica JVM Memory
+GET http://localhost:8080/actuator/metrics/jvm.memory.used
+
+### Actuator - Métrica HTTP Requests
+GET http://localhost:8080/actuator/metrics/http.server.requests
+
